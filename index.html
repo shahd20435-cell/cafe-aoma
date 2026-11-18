@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أروما كافيه | Aroma Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #140f0c;
+      --bg-card: #1f1713;
+      --gold: #d4a373;
+      --gold-hover: #e5b889;
+      --cream: #f8f4f0;
+      --text-muted: #b5a89e;
+      --border-color: rgba(212, 163, 115, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* الأزرار العامة */
+    .btn-primary {
+      background-color: var(--gold);
+      color: var(--bg-dark);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--gold-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--gold);
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 163, 115, 0.15);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .full-width {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* الشريط العلوي */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(20, 15, 12, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      padding: 15px 0;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-cart {
+      background: var(--bg-card);
+      color: var(--cream);
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* القسم الرئيسي */
+    .hero {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(20, 15, 12, 0.75), var(--bg-dark));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 750px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(212, 163, 115, 0.15);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    /* الأقسام العامة */
+    .section-padding {
+      padding: 90px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+    }
+
+    /* قصتنا */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-img img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .about-text h2 {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+
+    .features {
+      display: flex;
+      gap: 30px;
+    }
+
+    .feature-item h4 {
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    /* المنيو */
+    .menu-filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      color: var(--cream);
+      border: 1px solid var(--border-color);
+      padding: 8px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--gold);
+      color: var(--bg-dark);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .menu-card-body {
+      padding: 20px;
+    }
+
+    .menu-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .menu-card-top h3 {
+      font-size: 1.2rem;
+    }
+
+    .price {
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .menu-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    /* السلة الجانبية */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      z-index: 1100;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      left: -380px;
+      width: 350px;
+      max-width: 90vw;
+      height: 100vh;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border-color);
+      z-index: 1200;
+      display: flex;
+      flex-direction: column;
+      transition: 0.35s ease;
+      padding: 20px;
+    }
+
+    .cart-drawer.open {
+      left: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--cream);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      background: var(--bg-dark);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 15px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    /* نافذة الحجز */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1300;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--gold);
+      padding: 30px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 420px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+    }
+
+    .modal-box h3 {
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .modal-box input, .modal-box select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--cream);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* التذييل */
+    .footer {
+      background: #0d0a08;
+      border-top: 1px solid var(--border-color);
+      padding-top: 50px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      padding-bottom: 30px;
+    }
+
+    .footer h3 span, .footer h4 {
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* التجاوب مع الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الشريط العلوي (Navbar) -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo">أروما <span>كافيه</span></a>
+      
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="#about" data-ar="قصتنا" data-en="Our Story">قصتنا</a>
+        <a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a>
+        <a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="langToggle" class="btn-outline">EN</button>
+        <button id="cartBtn" class="btn-cart">
+          🛒 <span id="cartCount">0</span>
+        </button>
+        <button id="openBookingBtn" class="btn-primary" data-ar="احجز طاولة" data-en="Book a Table">احجز طاولة</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- القسم الرئيسي (Hero Section) -->
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <span class="badge" data-ar="محمصة قهوة مختصة" data-en="Specialty Coffee Roastery">محمصة قهوة مختصة</span>
+      <h1 data-ar="ابدأ يومك بكوب قهوة يُحكى عنه" data-en="Start Your Day With Unforgettable Coffee">ابدأ يومك بكوب قهوة يُحكى عنه</h1>
+      <p data-ar="نختار أجود حبوب البن المحمصة بعناية لنقدم لك تجربة استثنائية تجمع بين الأصالة والمذاق الفاخر." data-en="We select the finest roasted coffee beans to give you an exceptional experience blending authenticity and luxury.">
+        نختار أجود حبوب البن المحمصة بعناية لنقدم لك تجربة استثنائية تجمع بين الأصالة والمذاق الفاخر.
+      </p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-primary" data-ar="تصفح المنيو" data-en="Explore Menu">تصفح المنيو</a>
+        <button class="btn-secondary" onclick="openBookingModal()" data-ar="احجز طاولتك الآن" data-en="Reserve Now">احجز طاولتك الآن</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم قصتنا (About) -->
+  <section id="about" class="about section-padding">
+    <div class="container about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80" alt="تحضير القهوة">
+      </div>
+      <div class="about-text">
+        <h2 data-ar="شغفنا في كل قطرة" data-en="Our Passion in Every Drop">شغفنا في كل قطرة</h2>
+        <p data-ar="في أروما كافيه، نؤمن أن القهوة ليست مجرد مشروب، بل هي لحظة هدوء وإلهام. نحمص حبوبنا يومياً لنضمن لك أعلى درجات النضارة والنكهة الغنية في كل فنجان." data-en="At Aroma Cafe, we believe coffee is not just a drink, it is a moment of calm and inspiration. We roast our beans daily to guarantee maximum freshness.">
+          في أروما كافيه، نؤمن أن القهوة ليست مجرد مشروب، بل هي لحظة هدوء وإلهام. نحمص حبوبنا يومياً لنضمن لك أعلى درجات النضارة والنكهة الغنية في كل فنجان.
+        </p>
+        <div class="features">
+          <div class="feature-item">
+            <h4>100%</h4>
+            <span data-ar="بن أرابيكا طبيعي" data-en="Pure Arabica">بن أرابيكا طبيعي</span>
+          </div>
+          <div class="feature-item">
+            <h4>+15</h4>
+            <span data-ar="وصفة مبتكرة" data-en="Signature Drinks">وصفة مبتكرة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم المنيو (Menu Section) -->
+  <section id="menu" class="menu section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-ar="قائمة المشروبات والحلويات" data-en="Our Menu">قائمة المشروبات والحلويات</h2>
+        <p data-ar="اختر مشروبك المفضل وأضفه إلى سلتك مباشرة" data-en="Choose your favorite drink and add it directly to your cart">اختر مشروبك المفضل وأضفه إلى سلتك مباشرة</p>
+      </div>
+
+      <!-- أزرار الفلترة -->
+      <div class="menu-filters">
+        <button class="filter-btn active" data-category="all" data-ar="الكل" data-en="All">الكل</button>
+        <button class="filter-btn" data-category="hot" data-ar="قهوة ساخنة" data-en="Hot Coffee">قهوة ساخنة</button>
+        <button class="filter-btn" data-category="iced" data-ar="قهوة مثلجة" data-en="Iced Coffee">قهوة مثلجة</button>
+        <button class="filter-btn" data-category="dessert" data-ar="حلويات" data-en="Desserts">حلويات</button>
+      </div>
+
+      <!-- شبكة المنتجات -->
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </section>
+
+  <!-- التذييل (Footer) -->
+  <footer id="contact" class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>أروما <span>كافيه</span></h3>
+        <p data-ar="وجهتك المفضلة للقهوة المختصة والأجواء الدافئة." data-en="Your favorite destination for specialty coffee and warm vibes.">وجهتك المفضلة للقهوة المختصة والأجواء الدافئة.</p>
+      </div>
+      <div>
+        <h4 data-ar="مواعيد العمل" data-en="Opening Hours">مواعيد العمل</h4>
+        <p data-ar="يومياً: 8:00 صباحاً - 12:00 منتصف الليل" data-en="Daily: 8:00 AM - 12:00 AM">يومياً: 8:00 صباحاً - 12:00 منتصف الليل</p>
+      </div>
+      <div>
+        <h4 data-ar="العنوان" data-en="Location">العنوان</h4>
+        <p data-ar="شارع المشاية السفلية، المنصورة، مصر" data-en="El Mashaya Street, Mansoura, Egypt">شارع المشاية السفلية، المنصورة، مصر</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Aroma Cafe. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- السلة الجانبية (Cart Drawer) -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3 data-ar="سلة طلباتك" data-en="Your Order">سلة طلباتك</h3>
+      <button id="closeCartBtn" class="close-btn">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="total-row">
+        <span data-ar="الإجمالي:" data-en="Total:">الإجمالي:</span>
+        <span id="cartTotal">0 ج.م</span>
+      </div>
+      <button id="checkoutBtn" class="btn-primary full-width" data-ar="تأكيد الطلب" data-en="Place Order">تأكيد الطلب</button>
+    </div>
+  </aside>
+
+  <!-- نافذة حجز الطاولة (Booking Modal) -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-box">
+      <button class="close-btn modal-close" id="closeBookingBtn">&times;</button>
+      <h3 data-ar="احجز طاولتك" data-en="Book a Table">احجز طاولتك</h3>
+      <form id="bookingForm">
+        <input type="text" placeholder="الاسم بالكامل / Full Name" required>
+        <input type="tel" placeholder="رقم الهاتف / Phone Number" required>
+        <div class="form-row">
+          <input type="date" required>
+          <input type="time" required>
+        </div>
+        <select required>
+          <option value="" disabled selected>عدد الأفراد / Guests</option>
+          <option value="2">2 أفراد</option>
+          <option value="4">4 أفراد</option>
+          <option value="6">6 أفراد أو أكثر</option>
+        </select>
+        <button type="submit" class="btn-primary full-width" data-ar="تأكيد الحجز" data-en="Confirm Booking">تأكيد الحجز</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const menuData = [
+      {
+        id: 1,
+        category: 'hot',
+        nameAr: 'إسبريسو مزدوج',
+        nameEn: 'Double Espresso',
+        descAr: 'جرعة مركزة من بن أرابيكا المحمص بعناية مع كريمة ذهبية.',
+        descEn: 'Rich double shot of freshly roasted Arabica beans.',
+        price: 55,
+        img: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 2,
+        category: 'hot',
+        nameAr: 'سبانيش لاتيه ساخن',
+        nameEn: 'Hot Spanish Latte',
+        descAr: 'مزيج الإسبريسو الغني مع الحليب المبخر والحليب المكثف المحلى.',
+        descEn: 'Rich espresso blended with steamed milk and sweetened condensed milk.',
+        price: 85,
+        img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 3,
+        category: 'iced',
+        nameAr: 'آيس كراميل ماكياتو',
+        nameEn: 'Iced Caramel Macchiato',
+        descAr: 'حليب بارد مع ثلج وإسبريسو طازج مغطى بصوص الكراميل الفاخر.',
+        descEn: 'Chilled milk over ice topped with espresso and rich caramel drizzle.',
+        price: 95,
+        img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 4,
+        category: 'iced',
+        nameAr: 'كولد برو كلاسيك',
+        nameEn: 'Classic Cold Brew',
+        descAr: 'قهوة مقطرة على البارد لمدة 18 ساعة لمذاق ناعم ومنعش.',
+        descEn: 'Slow-steeped for 18 hours for a smooth, refreshing coffee flavor.',
+        price: 90,
+        img: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 5,
+        category: 'dessert',
+        nameAr: 'تشيز كيك اللوتس',
+        nameEn: 'Lotus Cheesecake',
+        descAr: 'طبقة كريمية غنية فوق بسكويت مقرمش ومغطاة بزبدة اللوتس.',
+        descEn: 'Creamy cheesecake over crunchy crust topped with Lotus spread.',
+        price: 110,
+        img: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 6,
+        category: 'dessert',
+        nameAr: 'مولتن كيك شوكولاتة',
+        nameEn: 'Chocolate Molten Cake',
+        descAr: 'كيك شوكولاتة دافئ بقلب سائل من الشوكولاتة البلجيكية الفاخرة.',
+        descEn: 'Warm chocolate cake with a rich molten Belgian chocolate center.',
+        price: 120,
+        img: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=600&q=80'
+      }
+    ];
+
+    let currentLang = 'ar';
+    let currentCategory = 'all';
+    let cart = [];
+
+    const menuGrid = document.getElementById('menuGrid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const langToggle = document.getElementById('langToggle');
+    const cartBtn = document.getElementById('cartBtn');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountEl = document.getElementById('cartCount');
+
+    function renderMenu() {
+      menuGrid.innerHTML = '';
+      const filtered = currentCategory === 'all' 
+        ? menuData 
+        : menuData.filter(item => item.category === currentCategory);
+
+      filtered.forEach(item => {
+        const name = currentLang === 'ar' ? item.nameAr : item.nameEn;
+        const desc = currentLang === 'ar' ? item.descAr : item.descEn;
+        const currency = currentLang === 'ar' ? 'ج.م' : 'EGP';
+        const btnText = currentLang === 'ar' ? 'أضف للسلة' : 'Add to Cart';
+
+        const card = document.createElement('div');
+        card.className = 'menu-card';
+        card.innerHTML = `
+          <img src="${item.img}" alt="${name}">
+          <div class="menu-card-body">
+            <div class="menu-card-top">
+              <h3>${name}</h3>
+              <span class="price">${item.price} ${currency}</span>
+            </div>
+            <p>${desc}</p>
+            <button class="btn-primary full-width" onclick="addToCart(${item.id})">${btnText}</button>
+          </div>
+        `;
+        menuGrid.appendChild(card);
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.category;
+        renderMenu();
+      });
+    });
+
+    function addToCart(id) {
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        const product = menuData.find(item => item.id === id);
+        cart.push({ ...product, qty: 1 });
+      }
+      updateCartUI();
+      openCart();
+    }
+
+    function updateCartUI() {
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+      let count = 0;
+      const currency = currentLang === 'ar' ? 'ج.م' : 'EGP';
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p style="text-align:center; color:#b5a89e; margin-top:30px;">${
+          currentLang === 'ar' ? 'السلة فارغة حالياً' : 'Your cart is empty'
+        }</p>`;
+      } else {
+        cart.forEach(item => {
+          total += item.price * item.qty;
+          count += item.qty;
+          const name = currentLang === 'ar' ? item.nameAr : item.nameEn;
+
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <div>
+              <h4>${name}</h4>
+              <span style="color:#d4a373; font-size:0.9rem;">${item.price * item.qty} ${currency}</span>
+            </div>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+              <span>${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+            </div>
+          `;
+          cartItemsContainer.appendChild(div);
+        });
+      }
+
+      cartTotalEl.textContent = `${total} ${currency}`;
+      cartCountEl.textContent = count;
+    }
+
+    function changeQty(id, delta) {
+      const index = cart.findIndex(item => item.id === id);
+      if (index !== -1) {
+        cart[index].qty += delta;
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+        updateCartUI();
+      }
+    }
+
+    function openCart() {
+      cartDrawer.classList.add('open');
+      cartOverlay.style.display = 'block';
+    }
+
+    function closeCart() {
+      cartDrawer.classList.remove('open');
+      cartOverlay.style.display = 'none';
+    }
+
+    cartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) return;
+      alert(currentLang === 'ar' 
+        ? 'تم استلام طلبك بنجاح! جاري تحضير قهوتك ☕' 
+        : 'Order received! Preparing your coffee ☕');
+      cart = [];
+      updateCartUI();
+      closeCart();
+    });
+
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      langToggle.textContent = currentLang === 'ar' ? 'EN' : 'عربي';
+
+      document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+
+      renderMenu();
+      updateCartUI();
+    });
+
+    const bookingModal = document.getElementById('bookingModal');
+    const openBookingBtn = document.getElementById('openBookingBtn');
+    const closeBookingBtn = document.getElementById('closeBookingBtn');
+
+    function openBookingModal() {
+      bookingModal.style.display = 'flex';
+    }
+
+    openBookingBtn.addEventListener('click', openBookingModal);
+    closeBookingBtn.addEventListener('click', () => bookingModal.style.display = 'none');
+
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert(currentLang === 'ar' 
+        ? 'تم تأكيد حجز طاولتك بنجاح! في انتظارك ✨' 
+        : 'Your table has been reserved! See you soon ✨');
+      bookingModal.style.display = 'none';
+      e.target.reset();
+    });
+
+    renderMenu();
+    updateCartUI();
+  </script>
+</body>
+</html>
